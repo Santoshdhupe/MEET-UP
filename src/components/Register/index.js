@@ -55,7 +55,10 @@ class Register extends Component {
       {value => {
         const {nameInput, activeTopicId} = this.state
         const {setName, setTopic} = value
-        return {setName: setName(nameInput), setTopic: setTopic(activeTopicId)}
+        return {
+          setName: setName(nameInput),
+          setTopic: setTopic(activeTopicId),
+        }
       }}
     </MeetupContext.Consumer>
   )
