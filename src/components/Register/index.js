@@ -50,27 +50,28 @@ class Register extends Component {
     this.setState({activeTopicId: event.target.value})
   }
 
-  onSubmitSuccess = () => (
-    <MeetupContext.Consumer>
-      {value => {
-        const {nameInput, activeTopicId} = this.state
-        const {setName, setTopic} = value
-        return {
-          setName: setName(nameInput),
-          setTopic: setTopic(activeTopicId),
-        }
-      }}
-    </MeetupContext.Consumer>
-  )
-
   onsubmitForm = event => {
     event.preventDefault()
     const {nameInput} = this.state
     if (nameInput === '') {
       this.setState({showError: true})
     } else {
-      this.onSubmitSuccess()
+      const {history} = this.props
+      history.replace('/')
+      return (
+        <MeetupContext.Consumer>
+          {value => {
+            const {activeTopicId} = this.state
+            const {setName, setTopic} = value
+            return {
+              setName: setName(nameInput),
+              setTopic: setTopic(activeTopicId),
+            }
+          }}
+        </MeetupContext.Consumer>
+      )
     }
+    return null
   }
 
   render() {
